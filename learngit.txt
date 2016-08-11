@@ -1,0 +1,724 @@
+1.git setting
+
+	Administrator@XY-019 MINGW64 /
+	$ git config --global user.name "pSeudo"
+
+	Administrator@XY-019 MINGW64 /
+	$ git config --global user.email "pseudocold@gmail.com"
+
+2.creat a reposiroey and add files
+
+	Administrator@XY-019 MINGW64 /
+	$ cd /y
+
+	Administrator@XY-019 MINGW64 /y
+	$ mkdir git
+	mkdir: cannot create directory ‘git’: File exists
+
+	Administrator@XY-019 MINGW64 /y
+	$ mkdir gitfile
+
+	Administrator@XY-019 MINGW64 /y
+	$ cd gitfile
+
+	Administrator@XY-019 MINGW64 /y/gitfile
+	$ pwd
+	/y/gitfile
+
+	Administrator@XY-019 MINGW64 /y/gitfile
+	$ ls
+
+	Administrator@XY-019 MINGW64 /y/gitfile
+	$ ls -ah
+	./  ../
+
+	Administrator@XY-019 MINGW64 /y/gitfile
+	$ git init
+	Initialized empty Git repository in Y:/gitfile/.git/
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ ls -ah
+	./  ../  .git/
+	
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ vim readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git status
+	On branch master
+	Changes not staged for commit:
+	  (use "git add <file>..." to update what will be committed)
+	  (use "git checkout -- <file>..." to discard changes in working directory)
+
+			modified:   readme.txt
+
+	no changes added to commit (use "git add" and/or "git commit -a")
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ vim readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git diff
+	diff --git a/readme.txt b/readme.txt
+	index c1093d3..68a552a 100644
+	--- a/readme.txt
+	+++ b/readme.txt
+	@@ -1,2 +1,43 @@
+	 1.git setting
+
+	+       Administrator@XY-019 MINGW64 /
+	+       $ git config --global user.name "pSeudo"
+	+
+	+       Administrator@XY-019 MINGW64 /
+	+       $ git config --global user.email "pseudocold@gmail.com"
+	+
+	+2.creat a reposiroey and add files
+	+
+	+       Administrator@XY-019 MINGW64 /
+	+       $ cd /y
+	+
+	+       Administrator@XY-019 MINGW64 /y
+	+       $ mkdir git
+	+       mkdir: cannot create directory ‘git’: File exists
+	+
+	+       Administrator@XY-019 MINGW64 /y
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git add readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git status
+	On branch master
+	Changes to be committed:
+	  (use "git reset HEAD <file>..." to unstage)
+
+			modified:   readme.txt
+
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git commit -m"add new contents"
+	[master 79d5fe5] add new contents
+	 1 file changed, 41 insertions(+)
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git status
+	On branch master
+	nothing to commit, working tree clean
+
+3.version rollback
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git log
+	commit c9e9fb252325c81a3588649c5b947b15a4798c3b
+	Author: pSeudo <pseudocold@gmail.com>
+	Date:   Wed Aug 10 01:33:59 2016 +0800
+
+		versiong rollback test
+
+	commit 79d5fe54cd64fd99210f8d8cf492a10a3904a364
+	Author: pSeudo <pseudocold@gmail.com>
+	Date:   Wed Aug 10 01:25:23 2016 +0800
+
+		add new contents
+
+	commit 55abb30fdd3ef8c1d577294f838f8d221fc26d5d
+	Author: pSeudo <pseudocold@gmail.com>
+	Date:   Wed Aug 10 01:08:03 2016 +0800
+
+		add a readme file
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$  git log --pretty=oneline
+	c9e9fb252325c81a3588649c5b947b15a4798c3b versiong rollback test
+	79d5fe54cd64fd99210f8d8cf492a10a3904a364 add new contents
+	55abb30fdd3ef8c1d577294f838f8d221fc26d5d add a readme file
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git reset --hard HEAD^
+	HEAD is now at 79d5fe5 add new contents
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ cat readme.txt
+	
+				<omit contents>
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git log
+	commit 79d5fe54cd64fd99210f8d8cf492a10a3904a364
+	Author: pSeudo <pseudocold@gmail.com>
+	Date:   Wed Aug 10 01:25:23 2016 +0800
+
+		add new contents
+
+	commit 55abb30fdd3ef8c1d577294f838f8d221fc26d5d
+	Author: pSeudo <pseudocold@gmail.com>
+	Date:   Wed Aug 10 01:08:03 2016 +0800
+
+		add a readme file
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git reset --hard c9e9fb
+	HEAD is now at c9e9fb2 versiong rollback test
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ cat readme.txt
+	
+				<omit contents>
+	
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git reset --hard HEAD^^
+	HEAD is now at 55abb30 add a readme file
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git reset --hard c9e9fb
+	HEAD is now at c9e9fb2 versiong rollback test
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git reset --hard HEAD~2
+	HEAD is now at 55abb30 add a readme file
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git reset --hard c9e9fb
+	HEAD is now at c9e9fb2 versiong rollback test
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git reflog
+	c9e9fb2 HEAD@{0}: reset: moving to c9e9fb
+	55abb30 HEAD@{1}: reset: moving to HEAD~2
+	c9e9fb2 HEAD@{2}: reset: moving to c9e9fb
+	55abb30 HEAD@{3}: reset: moving to HEAD^^
+	c9e9fb2 HEAD@{4}: reset: moving to c9e9fb
+	79d5fe5 HEAD@{5}: reset: moving to HEAD^
+	c9e9fb2 HEAD@{6}: commit: versiong rollback test
+	79d5fe5 HEAD@{7}: commit: add new contents
+	55abb30 HEAD@{8}: commit (initial): add a readme file
+
+4.three concepts
+
+    usually,the working directory is where your files exist,like the folder "gitfile",
+the directory contain a hidden dotfile directory called .git/,this is called repository.
+the file is altered in the working directory,then it should be added to the stage,
+finally it could be commited to the branch.
+
+5.recall and delete
+
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ cat readme.txt
+
+	5.recall and delete
+	this line will be delete.
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git status
+	On branch master
+	Changes not staged for commit:
+	  (use "git add <file>..." to update what will be committed)
+	  (use "git checkout -- <file>..." to discard changes in working directory)
+
+			modified:   readme.txt
+
+	no changes added to commit (use "git add" and/or "git commit -a")
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git checkout -- readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ cat readme.txt
+
+	5.recall and delete
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ cat readme.txt
+
+	5.recall and delete
+	this line will be delete again.
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git add readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git status
+	On branch master
+	Changes to be committed:
+	  (use "git reset HEAD <file>..." to unstage)
+
+			modified:   readme.txt
+
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git reset HEAD readme.txt
+	Unstaged changes after reset:
+	M       readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git status
+	On branch master
+	Changes not staged for commit:
+	  (use "git add <file>..." to update what will be committed)
+	  (use "git checkout -- <file>..." to discard changes in working directory)
+
+			modified:   readme.txt
+
+	no changes added to commit (use "git add" and/or "git commit -a")
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ cat readme.txt
+
+	5.recall and delete
+	this line will be delete again.
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git checkout -- readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git status
+	On branch master
+	nothing to commit, working tree clean
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ cat readme.txt
+
+	5.recall and delete
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git add test.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git commit -m"add test.txt"
+	[master a0ab42f] add test.txt
+	 1 file changed, 0 insertions(+), 0 deletions(-)
+	 create mode 100644 test.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ rm test.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git status
+	On branch master
+	Changes not staged for commit:
+	  (use "git add/rm <file>..." to update what will be committed)
+	  (use "git checkout -- <file>..." to discard changes in working directory)
+
+			deleted:    test.txt
+
+	no changes added to commit (use "git add" and/or "git commit -a")
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git rm test.txt
+	rm 'test.txt'
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git commit -m"remove test.txt"
+	[master 6aed8f8] remove test.txt
+	 1 file changed, 0 insertions(+), 0 deletions(-)
+	 delete mode 100644 test.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git add test2.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git commit -m"add test2.txt"
+	[master 4556839] add test2.txt
+	 1 file changed, 0 insertions(+), 0 deletions(-)
+	 create mode 100644 test2.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ rm test2.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git status
+	On branch master
+	Changes not staged for commit:
+	  (use "git add/rm <file>..." to update what will be committed)
+	  (use "git checkout -- <file>..." to discard changes in working directory)
+
+			deleted:    test2.txt
+
+	no changes added to commit (use "git add" and/or "git commit -a")
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git checkout -- test2.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ ls
+	readme.txt  test2.txt
+7.github
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git remote add origin git@github.com:Sepends/gitlearn.git
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git push -u origin master
+	The authenticity of host 'github.com (192.30.253.113)' can't be established.
+	RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+	Are you sure you want to continue connecting (yes/no)? y
+	Please type 'yes' or 'no': yes
+	Warning: Permanently added 'github.com,192.30.253.113' (RSA) to the list of known hosts.
+	Counting objects: 22, done.
+	Delta compression using up to 4 threads.
+	Compressing objects: 100% (15/15), done.
+	Writing objects: 100% (22/22), 3.06 KiB | 0 bytes/s, done.
+	Total 22 (delta 5), reused 0 (delta 0)
+	To git@github.com:Sepends/gitlearn.git
+	 * [new branch]      master -> master
+	Branch master set up to track remote branch master from origin.
+8.branch
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git checkout -b dev
+	Switched to a new branch 'dev'
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git branch master
+	fatal: A branch named 'master' already exists.
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git checkout master
+	Switched to branch 'master'
+	Your branch is up-to-date with 'origin/master'.
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git branch
+	  dev
+	* master
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git checkout dev
+	Switched to branch 'dev'
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git add readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git commit -m"branch test"
+	[dev 44fe286] branch test
+	 1 file changed, 3 insertions(+), 1 deletion(-)
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git checkout master
+	Switched to branch 'master'
+	Your branch is up-to-date with 'origin/master'.
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git merge dev
+	Updating 768f34c..44fe286
+	Fast-forward
+	 readme.txt | 4 +++-
+	 1 file changed, 3 insertions(+), 1 deletion(-)
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git branch -d dev
+	Deleted branch dev (was 44fe286).
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git branch
+	* master
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git checkout -b f1
+	Switched to a new branch 'f1'
+
+	Administrator@XY-019 MINGW64 /y/gitfile (f1)
+	$ git add readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (f1)
+	$ git commit -m"add test1"
+	[f1 2c23b0c] add test1
+	 1 file changed, 1 insertion(+), 1 deletion(-)
+
+	Administrator@XY-019 MINGW64 /y/gitfile (f1)
+	$ git checkout master
+	Switched to branch 'master'
+	Your branch is up-to-date with 'origin/master'.
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git add readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git commit -m"test1"
+	[master 2dbc7ba] test1
+	 1 file changed, 49 insertions(+), 49 deletions(-)
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git merge f1
+	Auto-merging readme.txt
+	CONFLICT (content): Merge conflict in readme.txt
+	Automatic merge failed; fix conflicts and then commit the result.
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master|MERGING)
+	$ git status
+	On branch master
+	Your branch is ahead of 'origin/master' by 1 commit.
+	  (use "git push" to publish your local commits)
+	You have unmerged paths.
+	  (fix conflicts and run "git commit")
+
+	Unmerged paths:
+	  (use "git add <file>..." to mark resolution)
+
+			both modified:   readme.txt
+
+	no changes added to commit (use "git add" and/or "git commit -a")
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master|MERGING)
+	$ cat readme.txt
+
+	8.branch
+	<<<<<<< HEAD
+			Administrator@XY-019 MINGW64 /y/gitfile (master)
+			$ git checkout -b dev
+			Switched to a new branch 'dev'
+
+			Administrator@XY-019 MINGW64 /y/gitfile (dev)
+			$ git branch master
+			fatal: A branch named 'master' already exists.
+
+			Administrator@XY-019 MINGW64 /y/gitfile (dev)
+			$ git checkout master
+			Switched to branch 'master'
+			Your branch is up-to-date with 'origin/master'.
+
+			Administrator@XY-019 MINGW64 /y/gitfile (master)
+			$ git branch
+			  dev
+			* master
+
+			Administrator@XY-019 MINGW64 /y/gitfile (master)
+			$ git checkout dev
+			Switched to branch 'dev'
+
+			Administrator@XY-019 MINGW64 /y/gitfile (dev)
+			$ git add readme.txt
+
+			Administrator@XY-019 MINGW64 /y/gitfile (dev)
+			$ git commit -m"branch test"
+			[dev 44fe286] branch test
+			 1 file changed, 3 insertions(+), 1 deletion(-)
+
+			Administrator@XY-019 MINGW64 /y/gitfile (dev)
+			$ git checkout master
+			Switched to branch 'master'
+			Your branch is up-to-date with 'origin/master'.
+
+			Administrator@XY-019 MINGW64 /y/gitfile (master)
+			$ git merge dev
+			Updating 768f34c..44fe286
+			Fast-forward
+			 readme.txt | 4 +++-
+			 1 file changed, 3 insertions(+), 1 deletion(-)
+
+			Administrator@XY-019 MINGW64 /y/gitfile (master)
+			$ git branch -d dev
+			Deleted branch dev (was 44fe286).
+
+			Administrator@XY-019 MINGW64 /y/gitfile (master)
+			$ git branch
+			* master
+	=======
+	this line is for test.it will be delete.
+	>>>>>>> f1
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master|MERGING)
+	$ git add readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master|MERGING)
+	$ git commit -m "conflict fixed"
+	[master fe40ea9] conflict fixed
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git log --graph --pretty=oneline --abbrev-commit
+	*   fe40ea9 conflict fixed
+	|\
+	| * 2c23b0c add test1
+	* | 2dbc7ba test1
+	* | 8b77213 add chapter branch
+	|/
+	* 44fe286 branch test
+	* 768f34c add github
+	* b751214 remove test2.txt
+	* 4556839 add test2.txt
+	* 6aed8f8 remove test.txt
+	* a0ab42f add test.txt
+	* b18d8ba add 2 examples
+	* 7b3fb2b add chapter4
+	* c9e9fb2 versiong rollback test
+	* 79d5fe5 add new contents
+	* 55abb30 add a readme file
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git branch -d f1
+	Deleted branch f1 (was 2c23b0c).
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git status
+	On branch master
+	Your branch is ahead of 'origin/master' by 5 commits.
+	  (use "git push" to publish your local commits)
+	Changes not staged for commit:
+	  (use "git add <file>..." to update what will be committed)
+	  (use "git checkout -- <file>..." to discard changes in working directory)
+
+			modified:   readme.txt
+
+	no changes added to commit (use "git add" and/or "git commit -a")
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git stash
+	Saved working directory and index state WIP on master: fd23806 merge with no-ff
+	HEAD is now at fd23806 merge with no-ff
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git status
+	On branch master
+	Your branch is ahead of 'origin/master' by 5 commits.
+	  (use "git push" to publish your local commits)
+	nothing to commit, working tree clean
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git checkout dev
+	Switched to branch 'dev'
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git checkout -b issue-1
+	Switched to a new branch 'issue-1'
+
+	Administrator@XY-019 MINGW64 /y/gitfile (issue-1)
+	$ git add readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (issue-1)
+	$ git commit -m"fix bug 1"
+	On branch issue-1
+	nothing to commit, working tree clean
+
+	Administrator@XY-019 MINGW64 /y/gitfile (issue-1)
+	$ git checkout master
+	Switched to branch 'master'
+	Your branch is ahead of 'origin/master' by 5 commits.
+	  (use "git push" to publish your local commits)
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git merge --no-f -m"merged bug fix 1" issue-1
+	Already up-to-date.
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git branch -d issue-1
+	Deleted branch issue-1 (was 44f3a7d).
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git checkout dev
+	Switched to branch 'dev'
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git status
+	On branch dev
+	nothing to commit, working tree clean
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git stash list
+	stash@{0}: WIP on master: fd23806 merge with no-ff
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git stash pop
+	On branch dev
+	Changes not staged for commit:
+	  (use "git add <file>..." to update what will be committed)
+	  (use "git checkout -- <file>..." to discard changes in working directory)
+
+			modified:   readme.txt
+
+	no changes added to commit (use "git add" and/or "git commit -a")
+	Dropped refs/stash@{0} (3b5badb18ca3aa3643e41045cfe987de75c9ebb6)
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git stash list
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git checkout -b f2
+	Switched to a new branch 'f2'
+
+	Administrator@XY-019 MINGW64 /y/gitfile (f2)
+	$ git add readme.txt
+
+	Administrator@XY-019 MINGW64 /y/gitfile (f2)
+	$ git status
+	On branch f2
+	Changes to be committed:
+	  (use "git reset HEAD <file>..." to unstage)
+
+			modified:   readme.txt
+
+
+	Administrator@XY-019 MINGW64 /y/gitfile (f2)
+	$ git commit -m"add crazy"
+	[f2 27393cf] add crazy
+	 1 file changed, 2 insertions(+)
+
+	Administrator@XY-019 MINGW64 /y/gitfile (f2)
+	$ git checkout dev
+	Switched to branch 'dev'
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git branch -d f2
+	error: The branch 'f2' is not fully merged.
+	If you are sure you want to delete it, run 'git branch -D f2'.
+
+	Administrator@XY-019 MINGW64 /y/gitfile (dev)
+	$ git branch -D f2
+	Deleted branch f2 (was 27393cf).
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git remote
+	origin
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git remote -v
+	origin  git@github.com:Sepends/gitlearn.git (fetch)
+	origin  git@github.com:Sepends/gitlearn.git (push)
+
+	Administrator@XY-019 MINGW64 /y/gitfile (master)
+	$ git push origin dev
+	Total 0 (delta 0), reused 0 (delta 0)
+	To git@github.com:Sepends/gitlearn.git
+	 * [new branch]      dev -> dev
+	 
+git tag v1.01
+git tat v0.91 <commit id>
+git show v1.01
+git tag -a v0.8 -m "version 0.8 released" <commit id>
+git tag -s v0.5 -m "signed version 0.2 released" <commit id>
+git tag -d v0.91
+git push origin v1.01
+git push origin --tags
+git tag -d v0.91
+git push origin :refs/tags/v0.91
+
+2016.8.10
+warning: 
+LF will be replaced by CRLF
+reason:
+CRLF -- Carriage-Return Line-Feed 回车换行
+回车(CR, ASCII 13, \r) 换行(LF, ASCII 10, \n)
+这两个字符不会有输出结果，Windows中用来标识一行结束，Linux中只有换行符
+即Windows中换行符为CRLF，Linux下为LF
+solution:
+delete the .git file,then type
+$ rm -rf .git
+$ git config --global core.autocrlf false
+2016.8.11
+warning：
+fatal: remote origin already exists.
+solution：
+$ git remote rm origin
+$ git add origin git@github.com:name/projectname.git
+warning:
+error: Could not remove config section 'remote.origin'.
+solution:
+delete the line "remote 'origin'"in "…\etc\gitconfig"
+2016.8.12
+warning：
+Bad owner or permissions on /home/pSeudo/.ssh/config
+fatal: Could not read from remote repository.
+solution：
+$ cd ~/.ssh
+$ chmod 600 config
+2016.8.13

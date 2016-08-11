@@ -1,0 +1,10 @@
+vim **.txt            creat a txt file named **.txt
+code mode
+type i,o,a,r          start to write.
+INSERT                edit text.
+type esc then switch to code line
+               wq     save and quit
+               q      quit
+               q!     quit without save
+fuckin' crazy..
+
